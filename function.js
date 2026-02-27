@@ -15,18 +15,27 @@ function counter(){
 
 
 //Interested Button
-const interestedElements=document.querySelectorAll(".Interested");
+let interestedElements=document.querySelectorAll(".Interested");
 for(const interestedElement of interestedElements){
-    interestedElement.addEventListener("click",function(){{
-        counter()
-        console.log("done! i")
-    }})
+    interestedElement.addEventListener("click",function(){
+        
+        const card=this.closest(".card")
+     
+        const upStatus=card.querySelector(".Status")
+         upStatus.style.backgroundColor='#FFA6A6'
+         upStatus.style.borderColor='#C3110C'
+         upStatus.style.color='#C3110C'
+
+
+
+
+    })
 }
 //Rejected Button
 const rejectedElements=document.querySelectorAll(".Rejected");
 for(const rejectedElement of rejectedElements){
     rejectedElement.addEventListener("click",function(){{
-       counter()
+     
         
         
 
