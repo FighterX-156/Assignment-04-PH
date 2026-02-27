@@ -18,13 +18,13 @@ function counter(){
 let interestedElements=document.querySelectorAll(".Interested");
 for(const interestedElement of interestedElements){
     interestedElement.addEventListener("click",function(){
-        
+        //status update
         const card=this.closest(".card")
-     
         const upStatus=card.querySelector(".Status")
-         upStatus.style.backgroundColor='#FFA6A6'
-         upStatus.style.borderColor='#C3110C'
-         upStatus.style.color='#C3110C'
+         upStatus.style.backgroundColor='#DDF4E7'
+         upStatus.style.borderColor='#16C47F'
+         upStatus.style.color='#004225'
+         upStatus.innerText="Interested"
 
 
 
@@ -35,8 +35,14 @@ for(const interestedElement of interestedElements){
 const rejectedElements=document.querySelectorAll(".Rejected");
 for(const rejectedElement of rejectedElements){
     rejectedElement.addEventListener("click",function(){{
+     //status update
+     const card=this.closest(".card")
      
-        
+        const upStatus=card.querySelector(".Status")
+         upStatus.style.backgroundColor='#FFA6A6'
+         upStatus.style.borderColor='#C3110C'
+         upStatus.style.color='#C3110C'
+         upStatus.innerText="Rejected"
         
 
     }})
