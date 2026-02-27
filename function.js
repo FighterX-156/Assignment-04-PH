@@ -25,6 +25,7 @@ for(const interestedElement of interestedElements){
          upStatus.style.borderColor='#16C47F'
          upStatus.style.color='#004225'
          upStatus.innerText="Interested"
+         upStatus.classList.remove("hidden")
 
 
 
@@ -43,6 +44,7 @@ for(const rejectedElement of rejectedElements){
          upStatus.style.borderColor='#C3110C'
          upStatus.style.color='#C3110C'
          upStatus.innerText="Rejected"
+         upStatus.classList.remove("hidden")
         
 
     }})
