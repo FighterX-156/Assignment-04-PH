@@ -1,18 +1,56 @@
 //Section of counting status 
- counter()
-//Counting Mechanism
 
-function counter(){
-    //total count
-      const totalJob=document.getElementById("all-Job-Post")
-    //total interested 
-      const totalInterestedJob=document.getElementById("all-Interested-Job-Post")
-    //total rejected
-        const totalRejectedJob=document.getElementById("all-Rejected-Job-Post")
-     document.getElementById("Total-count").innerText=totalJob.children.length
+//Counting Mechanism
+const jobPosts=document.querySelectorAll(".jobPost") 
+let Delete=0;
+let Rejected=0;
+let Interested=0;
+let transport=0;
+
+//total count
+      const Job=document.getElementById("all-Job-Post")
+      let totalJob=Job.children.length;
+      
+    
+totalCounter()
+function totalCounter(){
+    totalJob=totalJob-Delete;
+    const Totals= document.getElementsByClassName("Total-count")
+    for(const total of Totals){
+        total.innerText=totalJob;
+    }
     
 }
+function totalInterested(){
+    for(const jobPost of jobPosts){
+       const currentStatus=jobPost.querySelector(".Status")
 
+        if(currentStatus.innerText=="Interested"){
+            Interested++;
+            
+        }
+        
+        }
+        document.getElementById("Interested-count").innerText=Interested
+        Interested=0;
+       
+}
+
+function totalRejected(){
+    for(const jobPost of jobPosts){
+       const currentStatus=jobPost.querySelector(".Status")
+
+        if(currentStatus.innerText=="Rejected"){
+            Rejected++;
+            
+        }
+        
+        }
+        document.getElementById("Rejected-count").innerText=Rejected
+        Rejected=0;
+    
+       
+}
 
 //Interested Button
 let interestedElements=document.querySelectorAll(".Interested");
@@ -26,16 +64,17 @@ for(const interestedElement of interestedElements){
          upStatus.style.color='#004225'
          upStatus.innerText="Interested"
          upStatus.classList.remove("hidden")
-                
-
-
+          totalInterested();
+          totalRejected();
+          
+          
 
     })
 }
 //Rejected Button
 const rejectedElements=document.querySelectorAll(".Rejected");
 for(const rejectedElement of rejectedElements){
-    rejectedElement.addEventListener("click",function(){{
+    rejectedElement.addEventListener("click",function(){
      //status update
          const card=this.closest(".card")
          const upStatus=card.querySelector(".Status")
@@ -44,12 +83,14 @@ for(const rejectedElement of rejectedElements){
          upStatus.style.color='#C3110C'
          upStatus.innerText="Rejected"
          upStatus.classList.remove("hidden")
-        
+         totalRejected();
+         totalInterested();
+         
 
-    }})
+    })
 }
 //Section switching [toggle bar] 
-const jobPosts=document.querySelectorAll(".jobPost")
+
 //All Button
 document.getElementById("All-btn").addEventListener("click",function(){
 for(const jobPost of jobPosts){
@@ -58,7 +99,7 @@ for(const jobPost of jobPosts){
 //Interview Button
 
 document.getElementById("Interview-btn").addEventListener("click",function(){
-     console.log("button  clicked") 
+    
     for(const jobPost of jobPosts){
          jobPost.classList.add("hidden")
         const currentStatus=jobPost.querySelector(".Status")
@@ -75,7 +116,7 @@ document.getElementById("Interview-btn").addEventListener("click",function(){
 })
 //Rejected Button
 document.getElementById("Rejected-btn").addEventListener("click",function(){
-     console.log("button  clicked") 
+     
     for(const jobPost of jobPosts){
          jobPost.classList.add("hidden")
         const currentStatus=jobPost.querySelector(".Status")
@@ -98,6 +139,10 @@ let bins = document.querySelectorAll(".delete");
     bin.addEventListener("click",function(event){
         const card=event.target.closest(".card")
         card.classList.add("hidden")
+        Delete++
+        totalCounter()
+        Delete=0
+       
     })
   }
   
