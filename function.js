@@ -1,9 +1,9 @@
+
 //global
 const jobPosts = document.querySelectorAll(".jobPost");
 let Delete = 0;
 let Rejected = 0;
 let Interested = 0;
-let transport = 0;
 
 //Counting Mechanism
 //total count
@@ -14,17 +14,15 @@ totalCounter();
 function totalCounter() {
   totalJob = totalJob - Delete;
   const Totals = document.getElementsByClassName("Total-count");
+  Delete = 0;
   for (const total of Totals) {
     total.innerText = totalJob;
   }
-  if(totalJob==0){
-    document.getElementById("noPost").classList.remove("hidden")
-  }
-  
-  Delete = 0;
+  return totalJob;
 }
 //total interested count
 function totalInterested() {
+  Interested = 0;
   for (const jobPost of jobPosts) {
     const currentStatus = jobPost.querySelector(".Status");
 
@@ -33,15 +31,24 @@ function totalInterested() {
     }
   }
   document.getElementById("Interested-count").innerText = Interested;
-  if(Interested==0){
-  
+  return Interested;
+
+
+
+}
+//Hidden
+function noPostShow(val) {
+  if (val === 0) {
     document.getElementById("noPost").classList.remove("hidden")
   }
-  
-  Interested = 0;
+  else {
+    document.getElementById("noPost").classList.add("hidden")
+  }
+
 }
 //total rejected count
 function totalRejected() {
+  Rejected = 0;
   for (const jobPost of jobPosts) {
     const currentStatus = jobPost.querySelector(".Status");
 
@@ -50,12 +57,8 @@ function totalRejected() {
     }
   }
   document.getElementById("Rejected-count").innerText = Rejected;
-  if(Rejected==0){
-    
-    document.getElementById("noPost").classList.remove("hidden")
-  }
-  
-  Rejected = 0;
+  return Rejected;
+
 }
 
 //Interested Button
@@ -108,7 +111,9 @@ allButton.addEventListener("click", function () {
   for (const jobPost of jobPosts) {
     jobPost.classList.remove("hidden");
   }
-  totalCounter()
+  const tVal = totalCounter()
+
+  noPostShow(tVal)
 });
 //Interview Section VIew
 
@@ -133,8 +138,10 @@ interviewButton.addEventListener("click", function () {
       jobPost.classList.add("hidden");
     }
   }
-  totalInterested()
-});
+  const iVal = totalInterested()
+
+  noPostShow(iVal)
+  });
 //Rejected Section view
 const rejectedButton = document.getElementById("Rejected-btn");
 rejectedButton.addEventListener("click", function () {
@@ -158,7 +165,10 @@ rejectedButton.addEventListener("click", function () {
       jobPost.classList.add("hidden");
     }
   }
-  totalRejected()
+  const rVal = totalRejected()
+
+  noPostShow(rVal)
+
 });
 //delete function
 let bins = document.querySelectorAll(".delete");
@@ -167,6 +177,8 @@ for (const bin of bins) {
     const card = event.target.closest(".card");
     card.classList.add("hidden");
     Delete++;
-    totalCounter();
+    const tVal = totalCounter()
+    noPostShow(tVal)
+
   });
 }
