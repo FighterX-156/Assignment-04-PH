@@ -25,7 +25,7 @@ function totalInterested() {
   Interested = 0;
   for (const jobPost of jobPosts) {
     const currentStatus = jobPost.querySelector(".Status");
-
+    
     if (currentStatus.innerText == "Interested") {
       Interested++;
     }
@@ -179,6 +179,5 @@ for (const bin of bins) {
     Delete++;
     const tVal = totalCounter()
     noPostShow(tVal)
-
   });
 }
